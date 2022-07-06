@@ -5,21 +5,20 @@ import com.assignment.employeesalary.EmployeeSalary;
 import com.assignment.shared.helpers.Helper;
 import com.assignment.shared.models.*;
 import com.assignment.taxcalculator.TaxCalculator;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
+
+
 
 public class SalaryCalculator {
 
-    public static int counter = 0;
+    public static int totalCount = 0;
 
     public static int getCounter() {
-        return counter;
+        return totalCount;
     }
 
 
     public SalaryCalculator(){
-        counter++;
+        totalCount++;
     }
 
     public EmployeeSalary calculateSalary(double workingDays, SalaryGrades grade){

@@ -17,42 +17,59 @@ public class Main {
         String employeeDept;
         SalaryCalculator salaryCalculator = new SalaryCalculator();
 
-        ///////////////// input employee grade ///////////////////////////
-        do{
+        while(true){
+            ///////////////// input employee grade ///////////////////////////
+            do{
+                try{
+                    System.out.println("Enter employee grade (1-5):");
+                    employeeGrade = scanner.nextByte();
+                    if(employeeGrade < 1 || employeeGrade > 5){
+                        System.out.println("Invalid Input. Re enter");
+                    }
+                }
+                catch(InputMismatchException e){
+                    System.out.println("Invalid input. Re enter");
+                }
+                scanner.nextLine();
+
+            }while(employeeGrade < 1 || employeeGrade > 5);
+
+
+            ///////////////// input employee dept ///////////////////////////
+
+            System.out.println("Enter employee department:");
+            employeeDept = scanner.next();
+
+
+            ///////////////// input working days ///////////////////////////
+
+            do{
+                try{
+                    System.out.println("Enter No. of working days:");
+                    employeeWorkingDays = scanner.nextDouble();
+                    if(employeeWorkingDays <= 0 || employeeWorkingDays > Helper.getMonthDays()){
+                        System.out.println("Invalid Input. Re enter");
+                    }
+                }catch (InputMismatchException e){
+                    System.out.println("Invalid Input. Re enter:");
+                }
+                scanner.nextLine();
+            }while(employeeWorkingDays <= 0 || employeeWorkingDays > Helper.getMonthDays());
+
+            ///////////////// calculate salary ///////////////////////////
+
+            EmployeeSalary employeeSalary = salaryCalculator.calculateSalary(employeeWorkingDays, SalaryGrades.values()[employeeGrade-1]);
+            employeeSalary.displaySalarySlip(employeeSalary, SalaryGrades.values()[employeeGrade-1],employeeDept, employeeWorkingDays);
+
+            System.out.println("Press any key to continue, 0 to exit");
             try{
-                System.out.println("Enter employee grade (1-5):");
-                employeeGrade = scanner.nextByte();
-            }
-            catch(InputMismatchException e){
-                System.out.println("Invalid input. Re enter");
-            }
-            scanner.nextLine();
-
-        }while(employeeGrade < 1 || employeeGrade > 5);
-
-
-        ///////////////// input employee dept ///////////////////////////
-
-        System.out.println("Enter employee department:");
-        employeeDept = scanner.next();
-
-
-        ///////////////// input working days ///////////////////////////
-
-        do{
-            try{
-                System.out.println("Enter No. of working days:");
-                employeeWorkingDays = scanner.nextDouble();
+                byte terminator = scanner.nextByte();
+                if(terminator == 0) break;
             }catch (InputMismatchException e){
-                System.out.println("Invalid Input. Re enter:");
+                System.out.println("Invalid Input.");
             }
-            scanner.nextLine();
-        }while(employeeWorkingDays <= 0 || employeeWorkingDays > Helper.getMonthDays());
 
-        ///////////////// calculate salary ///////////////////////////
-
-        EmployeeSalary employeeSalary = salaryCalculator.calculateSalary(employeeWorkingDays, SalaryGrades.values()[employeeGrade-1]);
-        employeeSalary.displaySalarySlip(employeeSalary, SalaryGrades.values()[employeeGrade-1],employeeDept, employeeWorkingDays);
+        }
 
     }
 }
