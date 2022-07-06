@@ -1,6 +1,6 @@
 package com.assignment.taxcalculator;
 
-import com.assignment.models.SalaryGrades;
+import com.assignment.shared.models.SalaryGrades;
 
 public class TaxCalculator {
 

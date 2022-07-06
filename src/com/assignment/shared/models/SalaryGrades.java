@@ -1,4 +1,4 @@
-package com.assignment.models;
+package com.assignment.shared.models;
 
 public enum SalaryGrades {
     one (1),

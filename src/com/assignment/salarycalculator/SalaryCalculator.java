@@ -2,7 +2,8 @@ package com.assignment.salarycalculator;
 
 
 import com.assignment.employeesalary.EmployeeSalary;
-import com.assignment.models.*;
+import com.assignment.shared.helpers.Helper;
+import com.assignment.shared.models.*;
 import com.assignment.taxcalculator.TaxCalculator;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -21,7 +22,7 @@ public class SalaryCalculator {
         counter++;
     }
 
-    public EmployeeSalary calculateSalary(double workingDays, SalaryGrades grade, String dept){
+    public EmployeeSalary calculateSalary(double workingDays, SalaryGrades grade){
         double allowance = 0;
         double basicSalary = 0;
         double dailyRate = 0;
@@ -30,15 +31,11 @@ public class SalaryCalculator {
 
         allowance = Allowances.getGradeAllowance(grade);
         basicSalary = SalaryGrades.getGradeSalary(grade);
-        dailyRate = basicSalary/getMonthDays();
+        dailyRate = basicSalary/ Helper.getMonthDays();
         grossSalary = (dailyRate * workingDays) + allowance;
         taxAmount = TaxCalculator.calculateTax(grade, grossSalary);
         return new EmployeeSalary(grossSalary, basicSalary, taxAmount, dailyRate, allowance);
     }
 
-    public int getMonthDays(){
-        Date date = new Date();
-        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        return localDate.lengthOfMonth();
-    }
+
 }

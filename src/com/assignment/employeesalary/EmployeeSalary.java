@@ -1,5 +1,8 @@
 package com.assignment.employeesalary;
 
+import com.assignment.shared.helpers.Helper;
+import com.assignment.shared.models.SalaryGrades;
+
 public class EmployeeSalary {
 
     private final double grossSalary;
@@ -35,4 +38,20 @@ public class EmployeeSalary {
         this.dailyRate = dailyRate;
         this.totalAllowance = totalAllowance;
     }
+
+
+    public void displaySalarySlip(EmployeeSalary employeeSalary, SalaryGrades grade, String dept, double workingDays){
+        System.out.println("*****************************************************************************************");
+        System.out.println("Grade: " + grade.name() + "\t\t\t\t\t" + "Department: " + dept);
+        System.out.println("Daily Rate: " + String.format("%.3f", employeeSalary.getDailyRate()) + "\t\t\t" +
+                "Basic Salary: " + String.format("%.3f", employeeSalary.getBasicSalary()));
+        System.out.println("Allowances: " + String.format("%.3f", employeeSalary.getTotalAllowance()) + "\t\t\t" +
+                "Working Days : " + workingDays + "/" + Helper.getMonthDays());
+        System.out.println("Gross Salary: " + String.format("%.3f",employeeSalary.getGrossSalary()) + "\t\t" +
+                "Tax Deductions: " + String.format("%.3f", employeeSalary.getTaxAmount()));
+        System.out.println("Net Pay: " + String.format("%.3f", employeeSalary.getGrossSalary() - employeeSalary.getTaxAmount()));
+        System.out.println("*****************************************************************************************");
+
+    }
+
 }
