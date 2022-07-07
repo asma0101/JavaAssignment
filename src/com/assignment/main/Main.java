@@ -5,6 +5,7 @@ import com.assignment.shared.helpers.Helper;
 import com.assignment.shared.models.SalaryGrades;
 import com.assignment.salarycalculator.SalaryCalculator;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -15,9 +16,10 @@ public class Main {
         byte employeeGrade = 0;
         double employeeWorkingDays = 1;
         String employeeDept;
-        SalaryCalculator salaryCalculator = new SalaryCalculator();
 
         while(true){
+            SalaryCalculator salaryCalculator = new SalaryCalculator();
+
             ///////////////// input employee grade ///////////////////////////
             do{
                 try{
@@ -61,14 +63,12 @@ public class Main {
             EmployeeSalary employeeSalary = salaryCalculator.calculateSalary(employeeWorkingDays, SalaryGrades.values()[employeeGrade-1]);
             employeeSalary.displaySalarySlip(employeeSalary, SalaryGrades.values()[employeeGrade-1],employeeDept, employeeWorkingDays);
 
-            System.out.println("Press any key to continue, 0 to exit");
-            try{
-                byte terminator = scanner.nextByte();
-                if(terminator == 0) break;
-            }catch (InputMismatchException e){
-                System.out.println("Invalid Input.");
+            System.out.println("Salary Calculator has been called " + SalaryCalculator.getCounter() + " times.");
+            System.out.println("Press 1 to continue, 0 to exit");
+            byte terminator = scanner.nextByte();
+            if(terminator == 0){
+                break;
             }
-
         }
 
     }
