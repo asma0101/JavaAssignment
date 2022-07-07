@@ -16,9 +16,10 @@ public class Main {
         byte employeeGrade = 0;
         double employeeWorkingDays = 1;
         String employeeDept;
+        SalaryCalculator salaryCalculator = new SalaryCalculator();
+
 
         while(true){
-            SalaryCalculator salaryCalculator = new SalaryCalculator();
 
             ///////////////// input employee grade ///////////////////////////
             do{
